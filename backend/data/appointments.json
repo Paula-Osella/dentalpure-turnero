@@ -58,5 +58,15 @@
     "fecha": "2026-03-19",
     "hora": "09:00",
     "createdAt": "2026-03-16T23:38:17.093Z"
+  },
+  {
+    "nombre": "paula",
+    "apellido": "osella",
+    "telefono": "35171.116",
+    "email": "paulaosella978@gmail.com",
+    "tratamiento": "Implantes Dentales",
+    "fecha": "2026-03-20",
+    "hora": "09:30",
+    "createdAt": "2026-03-19T00:01:13.165Z"
   }
 ]
