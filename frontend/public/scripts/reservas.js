@@ -1,5 +1,7 @@
 console.log("reservas.js cargado");
 
+const API_URL = "https://dentalpure-turnero.onrender.com";
+
 document.addEventListener("DOMContentLoaded", () => {
   let horaSeleccionada = null;
   const fechaInput = document.getElementById("fecha");
@@ -10,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!fecha) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/availability?date=${fecha}`);
+      const res = await fetch(`${API_URL}/api/availability?date=${fecha}`);
       const data = await res.json();
       renderHorarios(data.availableSlots);
     } catch (err) {
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/appointments", {
+      const res = await fetch(`${API_URL}/api/appointments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
