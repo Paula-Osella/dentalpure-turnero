@@ -2,53 +2,53 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Reservar turno | DentalPure">
+<Layout title="Book appointment | DentalPure">
 
 <section class="reserva-container">
 
-<h1>Reservar turno</h1>
-<p>Elegí el tratamiento, el horario y completá tus datos.</p>
+<h1>Book an appointment</h1>
+<p>Choose your treatment, time slot and fill in your details.</p>
 
 <div class="step">
-<h2>1. Tratamiento</h2>
+<h2>1. Treatment</h2>
 
 <select id="tratamiento">
-<option value="">Seleccionar tratamiento</option>
-<option>Blanqueamiento Dental</option>
-<option>Implantes Dentales</option>
-<option>Ortodoncia Invisible</option>
-<option>Endodoncia</option>
-<option>Odontología Infantil</option>
-<option>Consulta General</option>
+<option value="">Select a treatment</option>
+<option>Teeth Whitening</option>
+<option>Dental Implants</option>
+<option>Invisible Orthodontics</option>
+<option>Endodontics</option>
+<option>Pediatric Dentistry</option>
+<option>General Consultation</option>
 </select>
 </div>
 
 <div class="step">
-<h2>2. Fecha</h2>
+<h2>2. Date</h2>
 
 <input type="date" id="fecha" />
 
-<h2>Horarios disponibles</h2>
+<h2>Available time slots</h2>
 
 <div class="horarios" id="horariosContainer"></div>
 </div>
 
 <div class="step">
 
-<h2>3. Tus datos</h2>
+<h2>3. Your details</h2>
 
 <div class="form-row">
-<input id="nombre" type="text" placeholder="Nombre"/>
-<input id="apellido" type="text" placeholder="Apellido"/>
+<input id="nombre" type="text" placeholder="First name"/>
+<input id="apellido" type="text" placeholder="Last name"/>
 </div>
 
 <div class="form-row">
-<input id="telefono" type="tel" placeholder="Teléfono"/>
+<input id="telefono" type="tel" placeholder="Phone"/>
 <input id="email" type="email" placeholder="Email"/>
 </div>
 
 <button class="reservar-btn" onclick="crearReserva()">
-Confirmar reserva
+Confirm appointment
 </button>
 
 </div>
@@ -56,19 +56,19 @@ Confirmar reserva
 </section>
 
 
-<!-- MODAL CONFIRMACION -->
+<!-- CONFIRMATION MODAL -->
 <div id="modalConfirmacion" class="modal">
 
 <div class="modal-card">
 
 <div class="check">✓</div>
 
-<h2>Turno confirmado</h2>
+<h2>Appointment confirmed</h2>
 
 <p id="textoConfirmacion"></p>
 
 <button onclick="cerrarModal()" class="cerrar-btn">
-Cerrar
+Close
 </button>
 
 </div>
