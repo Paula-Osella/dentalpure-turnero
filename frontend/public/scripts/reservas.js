@@ -1,7 +1,5 @@
 console.log("reservas.js cargado");
 
-const API_URL = "https://dentalpure-turnero.onrender.com";
-
 document.addEventListener("DOMContentLoaded", () => {
   let horaSeleccionada = null;
   const fechaInput = document.getElementById("fecha");
@@ -12,11 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!fecha) return;
 
     try {
-      const res = await fetch(`${API_URL}/api/availability?date=${fecha}`);
+      const res = await fetch(`https://dentalpure-turnero.onrender.com/api/availability?date=${fecha}`);
       const data = await res.json();
       renderHorarios(data.availableSlots);
     } catch (err) {
-      console.error(err);
+      console.error("Error al obtener horarios:", err);
     }
   });
 
@@ -28,11 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.className = "hora";
       btn.textContent = hora;
       btn.type = "button";
+
       btn.onclick = () => {
         document.querySelectorAll(".hora").forEach(b => b.classList.remove("selected"));
         btn.classList.add("selected");
         horaSeleccionada = hora;
       };
+
       horariosContainer.appendChild(btn);
     });
   }
@@ -51,9 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch(`${API_URL}/api/appointments`, {
+      const res = await fetch("https://dentalpure-turnero.onrender.com/api/appointments", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
           tratamiento,
           fecha,
@@ -61,15 +63,24 @@ document.addEventListener("DOMContentLoaded", () => {
           nombre,
           apellido,
           telefono,
-          email,
-        }),
+          email
+        })
       });
 
       const data = await res.json();
-      mostrarConfirmacion({ tratamiento, fecha, hora: horaSeleccionada, nombre, apellido });
+
+      mostrarConfirmacion({
+        tratamiento,
+        fecha,
+        hora: horaSeleccionada,
+        nombre,
+        apellido
+      });
+
       limpiarFormulario();
+
     } catch (err) {
-      console.error(err);
+      console.error("Error al guardar reserva:", err);
       alert("Error al guardar la reserva");
     }
   };
@@ -81,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const fechaFormateada = new Date(reserva.fecha).toLocaleDateString("es-AR", {
       day: "numeric",
       month: "long",
-      year: "numeric",
+      year: "numeric"
     });
 
     texto.innerHTML = `
@@ -100,7 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function limpiarFormulario() {
     const campos = ["tratamiento", "fecha", "nombre", "apellido", "telefono", "email"];
-    campos.forEach(id => (document.getElementById(id).value = ""));
+    campos.forEach(id => {
+      document.getElementById(id).value = "";
+    });
+
     document.getElementById("horariosContainer").innerHTML = "";
+    horaSeleccionada = null;
   }
 });
