@@ -1,4 +1,4 @@
-console.log("reservas.js cargado");
+console.log("reservas.js loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
   let horaSeleccionada = null;
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       renderHorarios(data.availableSlots);
     } catch (err) {
-      console.error("Error al obtener horarios:", err);
+      console.error("Error fetching time slots:", err);
     }
   });
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("email").value;
 
     if (!tratamiento || !fecha || !horaSeleccionada) {
-      alert("Completá tratamiento, fecha y horario");
+      alert("Please fill in treatment, date and time slot");
       return;
     }
 
@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       limpiarFormulario();
 
     } catch (err) {
-      console.error("Error al guardar reserva:", err);
-      alert("Error al guardar la reserva");
+      console.error("Error saving appointment:", err);
+      alert("Error saving the appointment");
     }
   };
 
@@ -89,17 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("modalConfirmacion");
     const texto = document.getElementById("textoConfirmacion");
 
-    const fechaFormateada = new Date(reserva.fecha).toLocaleDateString("es-AR", {
+    const fechaFormateada = new Date(reserva.fecha).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric"
     });
 
     texto.innerHTML = `
-      Ya tenés tu turno agendado ✔️<br><br>
+      Your appointment has been booked ✔️<br><br>
       <strong>${reserva.tratamiento}</strong><br>
-      ${fechaFormateada} a las <strong>${reserva.hora}</strong><br><br>
-      Paciente: ${reserva.nombre} ${reserva.apellido}
+      ${fechaFormateada} at <strong>${reserva.hora}</strong><br><br>
+      Patient: ${reserva.nombre} ${reserva.apellido}
     `;
 
     modal.classList.add("show");
