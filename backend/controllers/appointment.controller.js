@@ -10,26 +10,26 @@ try {
 
 const newAppointment = new Appointment(req.body)
 
-// leer archivo
+// read file
 const data = fs.readFileSync(filePath, "utf-8")
 
 const appointments = JSON.parse(data)
 
-// agregar nueva reserva
+// add new booking
 appointments.push(newAppointment)
 
-// guardar nuevamente
+// save again
 fs.writeFileSync(filePath, JSON.stringify(appointments, null, 2))
 
 res.status(201).json({
-message: "Reserva guardada correctamente",
+message: "Appointment saved successfully",
 appointment: newAppointment
 })
 
 } catch (error) {
 
 res.status(500).json({
-error: "Error al guardar reserva"
+error: "Error saving appointment"
 })
 
 }
@@ -42,11 +42,11 @@ try {
 
 const { date } = req.query
 
-// leer reservas existentes
+// read existing bookings
 const data = fs.readFileSync(filePath, "utf-8")
 const appointments = JSON.parse(data)
 
-// horarios posibles del consultorio
+// all possible clinic time slots
 const allSlots = [
 "09:00",
 "09:30",
@@ -58,12 +58,12 @@ const allSlots = [
 "12:30"
 ]
 
-// obtener turnos ya reservados ese día
+// get already booked slots for that day
 const bookedSlots = appointments
 .filter(a => a.fecha === date)
 .map(a => a.hora)
 
-// calcular horarios disponibles
+// calculate available time slots
 const availableSlots = allSlots.filter(
 slot => !bookedSlots.includes(slot)
 )
@@ -75,7 +75,7 @@ availableSlots
 } catch (error) {
 
 res.status(500).json({
-error: "Error calculando disponibilidad"
+error: "Error calculating availability"
 })
 
 }
